@@ -1,0 +1,30 @@
+<html>
+<body>
+    <h2>Результаты обработки</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Слово</th>
+                <th>TF</th>
+                <th>IDF</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in data %}
+            <tr>
+                <td>{{ item.word }}</td>
+                <td>{{ item.tf }}</td>
+                <td>{{ "%.4f"|format(item.idf) }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div>
+        {% if total_pages > 1 %}
+            {% for p in range(1, total_pages + 1) %}
+                <a href="/results?cache_id={{ cache_id }}&page={{ p }}" {% if p == current_page %}style="font-weight: bold;"{% endif %}>{{ p }}</a>
+            {% endfor %}
+        {% endif %}
+    </div>
+</body>
+</html>
